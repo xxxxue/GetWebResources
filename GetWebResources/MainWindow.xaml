@@ -1,0 +1,45 @@
+﻿<Window x:Class="GetWebResources.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+
+        TextElement.FontWeight="Normal"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Title="一键获取Web资源" Width="1290" Height="672">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Red" BorderThickness="0,0,0,1" Background="White" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5">
+                <CheckBox Margin="10,0,0,0" Name="CheckBoxOpenHostFilter" Content="打开Host筛选" VerticalAlignment="Center"
+                          IsChecked="{Binding OpenHostFilter}"
+                          />
+                <TextBox Margin="10,0,0,0"  Text="{Binding TextBoxWebUrl}" Width="auto" MinWidth="150" MaxWidth="400" VerticalAlignment="Center" />
+
+                <Button
+                    Command="{Binding LoadUrlCommand}"                    
+                    Content="加载 / 刷新"
+                    Margin="2,0" />
+
+                <Button Margin="10,0,0,0"  Content="获取资源" Command="{Binding  GetResourcesCommand}" />
+                <Label Margin="10,0,0,0" Content="资源数: " VerticalAlignment="Center"></Label>
+                <Label Margin="0,0,0,0" Content="{Binding FileCount}" VerticalAlignment="Center" />
+                <Button Margin="10,0,0,0"  Content="打开设置目录" Command="{Binding OpenConfigCommand }" />
+                <Button Margin="10,0,0,0"  Content="浏览器内核检测" Command="{Binding CheckCoreCommand}" />
+                <ComboBox Margin="10,0,0,0" Name="ComboBoxHistory" Width="200" />
+            </StackPanel>
+        </Border>
+
+        <wv2:WebView2 Grid.Row="1" x:Name="Web" Margin="0,5,0,5" Source="{Binding WebView2Source}"   Grid.ColumnSpan="2" />
+    </Grid>
+</Window>
